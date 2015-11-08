@@ -1,0 +1,47 @@
+import rxtxrobot.AnalogPin;
+import rxtxrobot.ArduinoNano;
+import rxtxrobot.RXTXRobot;
+
+public class TempSensor
+{
+	public static void main(String[] args)
+	{
+		RXTXRobot robot = new ArduinoNano();
+		
+		robot.setPort("COM3");
+//		robot.setVerbose(true);
+		
+		robot.connect();
+		
+		//CODE FOR DELIVERABLE\\
+		double thermistorReading = getThermistorReading(robot);
+		
+		System.out.printf("The probe read the value: %.02f\n" , thermistorReading);
+		System.out.printf("In volts: %.2f\n",(thermistorReading * (5.0/1023.0)));
+		double temp = (thermistorReading - 919.55) / (-10.182);
+		System.out.printf("In celcius: %.2fC\n", temp);
+		
+//		tempInC = (-8.3/(average-930.5))*(5.0/1023);	//Gets the 
+		
+//		System.out.printf("Temperatue = %.2fC", tempInC);
+		
+		//END CODE\\
+		
+		robot.close();
+	}
+	
+	public static double getThermistorReading(RXTXRobot robot)
+	{
+		int sum = 0;
+		int readingCount = 10;
+		
+		for(int i = 0; i < readingCount; i++)
+		{
+			robot.refreshAnalogPins();
+			int reading = robot.getAnalogPin(6).getValue();
+			sum+=reading;
+		}
+		
+		return (double)sum / readingCount;
+	}
+}

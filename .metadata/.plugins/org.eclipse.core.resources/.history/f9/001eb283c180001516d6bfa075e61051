@@ -1,0 +1,99 @@
+import rxtxrobot.*;
+
+public class MainController {
+	public static void main(String[] args) {
+		/* 1. robot starts up
+		 * 	-we know that the robot is in x sector therefore we've got the degrees already
+		 *   oriented prior to startup.
+		 *   -print gps coordinates
+		 * 2. move forward *10 meters* to the charging location
+		 * 3. wait 5s to fulfill requirement
+		 * 4. start while loop (while conductivity&&air)
+		 * 		1. locate nearest objective relative to current location
+		 * 		2. turn to face objective
+		 * 		3. move towards objective
+		 * 		*** at any time during translocation may initiate evasive function
+		 * 		4. reach location
+		 * 		5. do objective 
+		 * 		6. objective = !objective
+		 * 5. exit loop
+		 * 6. 
+		 * 
+		 * 
+		 */
+		
+		boolean conductivity = false;  //boolean variables to signal when task = completed
+		boolean air = false;
+		
+		RXTXRobot movement = new ArduinoNano();
+		movement.setPort("COM3");
+		movement.setVerbose(true);
+		
+		//Put GPS code here
+		//Print current coordinates
+		
+	//	RXTXRobot sensors = new ArduinoNano();
+	//	sensors.setPort("COM5");
+		
+		movement.connect();
+	//	sensors.connect();
+		
+		//GPS
+//		movement.attachGPS();
+		
+//		double gps[] = movement.getGPSCoordinates();
+		
+//		System.out.println(gps[0] + " " + gps[1] + " " + gps[2] + " " + gps[3]);		
+		
+		//MOTORS || Note: Will be code to move forward 10 meters
+//		movement.attachMotor(RXTXRobot.MOTOR1, 5);
+//		movement.attachMotor(RXTXRobot.MOTOR2, 6);
+		//After moving forward 10m, wait 10s
+		
+		movement.runEncodedMotor(RXTXRobot.MOTOR1, 255, 100);
+		movement.runEncodedMotor(RXTXRobot.MOTOR2, 255, 100);
+		
+		//airloc = airLocation();
+		//conductivityloc = conductivityLocation();
+		
+		//Note: Most method names are pseudocode. Replace with actual methods later.
+		/*while(!conductivity && !air) {
+		 * currentloc = getCurrentLocation();
+		 * if(!conductivity && !air) {
+		 *	 if(currentloc.getDistance(airloc) < currentloc.getDistance(conductivityloc) {
+		 * 		rotate(xDegrees);
+		 * 		moveTo(airloc);
+		 * 		conductivityMethods();
+		 * 		air = !air;
+		 *	 }
+		 * 	 else {
+		 * 		rotate(xDegrees);
+		 * 		moveTo(conductivityloc);
+		 * 	 }
+		 *  }
+		 *  else if(!conductivity && air) {
+		 *  	rotate(xDegrees);
+		 *  	moveTo(conductivityloc);
+		 *  	conductivityMethods();
+		 *  	conductivity = !conductivity;
+		 *   }
+		 *  else if(conductivity && !air) {
+		 *  	rotate(xDegrees);
+		 *  	moveTo(airloc);
+		 *  	airMethods();
+		 *  	air = !air;
+		 *  }
+		 *  else {
+		 *  	System.out.println("Finished.");
+		 *  }
+		 *  }
+		 * 
+		 */
+		
+
+		
+		
+		//sensors.close();
+        movement.close();	
+	}
+}

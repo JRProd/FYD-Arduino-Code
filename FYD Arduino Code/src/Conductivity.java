@@ -1,0 +1,28 @@
+import rxtxrobot.*;
+
+public class Conductivity {
+	public static void main(String[] args)
+	{
+		RXTXRobot robot = new ArduinoNano();
+		
+		robot.setPort("COM3");
+		
+		robot.connect();
+		
+		int adc = robot.getConductivity();
+		
+		System.out.println(adc);
+
+		double resistance;
+		if(adc!=0)
+		{
+			resistance= (-2000*adc)/(adc-1);
+		
+			double ohms = (0.4)/(resistance*3);
+		
+			System.out.println("R = " + resistance + " Ohms = " + ohms);
+		}
+		
+		robot.close();
+	}
+}

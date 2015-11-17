@@ -8,29 +8,28 @@ public class TempSensor
 	{
 		RXTXRobot robot = new ArduinoNano();
 		
-		robot.setPort("COM3");
+		robot.setPort("COM5");
 //		robot.setVerbose(true);
 		
 		robot.connect();
 		
 		//CODE FOR DELIVERABLE\\
-		double thermistorReading = getThermistorReading(robot,6);
 		
-		double anomonitorReading = getThermistorReading(robot,7);
+		double thermistorReading = getThermistorReading(robot,0);
 		
-		System.out.printf("The probe read the value: %.02f\n" , thermistorReading);
+		double anomonitorReading = getThermistorReading(robot,2);
+		
+		System.out.printf("The thermistor probe read the value: %.02f\n" , thermistorReading);
 		System.out.printf("In volts: %.2f\n",(thermistorReading * (5.0/1023.0)));
-		double tempWind = (thermistorReading - 919.55) / (-10.182);
-		System.out.printf("In celcius: %.2fC\n", tempWind);
+		double temp = (thermistorReading - 919.55) / (-10.182);
+		System.out.printf("In celcius: %.2fC\n\n", temp);
 		
-		System.out.printf("The probe read the value: %.02f\n" , anomonitorReading);
+		robot.sleep(1000);
+		
+		System.out.printf("The anomonitor probe read the value: %.02f\n" , anomonitorReading);
 		System.out.printf("In volts: %.2f\n",(anomonitorReading * (5.0/1023.0)));
-		double temp = (anomonitorReading - 919.55) / (-10.182);
-		System.out.printf("In celcius: %.2fC\n", temp);
-		
-//		tempInC = (-8.3/(average-930.5))*(5.0/1023);	//Gets the 
-		
-//		System.out.printf("Temperatue = %.2fC", tempInC);
+		double tempWind = (anomonitorReading - 919.55) / (-10.182);
+		System.out.printf("In celcius: %.2fC\n", tempWind);
 		
 		//END CODE\\
 		

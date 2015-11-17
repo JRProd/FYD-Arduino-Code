@@ -5,7 +5,7 @@ public class Conductivity {
 	{
 		RXTXRobot robot = new ArduinoNano();
 		
-		robot.setPort("COM3");
+		robot.setPort("COM5");
 		
 		robot.connect();
 		
@@ -13,14 +13,11 @@ public class Conductivity {
 		
 		System.out.println(adc);
 
-		double resistance;
 		if(adc!=0)
-		{
-			resistance= (-2000*adc)/(adc-1);
+		{		
+			double waterPerc = ((-.02765)*adc) + 30.37759;
 		
-			double ohms = (0.4)/(resistance*3);
-		
-			System.out.println("R = " + resistance + " Ohms = " + ohms);
+			System.out.println( "% of Water = " + waterPerc);
 		}
 		
 		robot.close();

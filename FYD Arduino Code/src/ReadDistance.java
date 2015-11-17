@@ -9,13 +9,13 @@ public class ReadDistance
 	{
 		RXTXRobot robot = new ArduinoNano();
 
-		robot.setPort("COM3");
+		robot.setPort("COM4");
 //		robot.setVerbose(true);
 
 		robot.connect();
 
 		// CODE FOR DELIVERABLE\\
-		final int PING_PORT = 13;
+		final int PING_PORT = 12;
 		
 
 		System.out.println("Starting Measurement.");
